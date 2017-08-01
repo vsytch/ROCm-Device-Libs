@@ -3,12 +3,12 @@ from sys import exit, argv
 from shutil import rmtree, copyfile
 from subprocess import check_call
 
-src_dir = "C:/hcc windows/hcc/rocdl"#os.path.dirname(argv[0])
-build_dir = src_dir + "/build"
-bin = src_dir + "/../build/release/bin/"
-clang = bin + "clang"
-opt = bin + "opt"
-llvm_link = bin + "llvm-link"
+src_dir = ""
+build_dir = ""
+bin = ""
+clang = "clang"
+opt = "opt"
+llvm_link = "llvm-link"
 
 rocdl = \
 {
@@ -740,6 +740,11 @@ def prepare_builtins():
             copyfile(lib + ".amdgcn.bc", build_dir + "/lib/" + lib + ".amdgcn.bc")
             
 if __name__ == "__main__":
+    if not src_dir:
+        src_dir = os.path.dirname(argv[0])
+    build_dir = src_dir + "/build"
+    bin = src_dir + "/../build/release/bin/"
+
     compile_pb()
     generate()
     build()
