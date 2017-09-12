@@ -66,32 +66,3 @@ endif(BUILD_HC_LIB)
 if(AMDGCN_TARGETS_LIB_LIST)
   set(${AMDGCN_TARGETS_LIB_LIST} ${AMDGCN_LIB_LIST} PARENT_SCOPE)
 endif(AMDGCN_TARGETS_LIB_LIST)
-
-if(ROCM_DEVICELIB_INCLUDE_TESTS)
-  if (NOT AMDHSACOD)
-    message(WARNING "amdhsacod is not found, testing disabled")
-    message(WARNING "Specify amdhsacod executable with -DAMDHSACOD=<...>")
-  endif()
-  enable_testing()
-  add_subdirectory(test/opencl)
-  add_subdirectory(test/opencl_conformance)
-endif(ROCM_DEVICELIB_INCLUDE_TESTS)
-
-## CPack standard variables
-set ( CPACK_PACKAGE_NAME "rocm-device-libs" )
-set ( CPACK_PACKAGE_VERSION_MAJOR "0" )
-set ( CPACK_PACKAGE_VERSION_MINOR "0" )
-set ( CPACK_PACKAGE_VERSION_PATCH "1" )
-set ( CPACK_PACKAGE_CONTACT "" )
-set ( CPACK_PACKAGE_DESCRIPTION_SUMMARY "Radeon Open Compute - device libraries" )
-set ( CPACK_PACKAGE_DESCRIPTION "This package includes LLVM bitcode libraries." )
-set ( CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/RadeonOpenCompute/ROCm-Device-Libs" )
-
-set ( CPACK_GENERATOR DEB RPM )
-
-## Debian package values
-set ( CPACK_DEBIAN_PACKAGE_MAINTAINER "AMD" )
-set ( CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" )
-set ( CPACK_DEBIAN_PACKAGE_DEPENDS "" )
-
-include ( CPack )
